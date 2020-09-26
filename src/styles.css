@@ -1,0 +1,171 @@
+    body {
+        display: flex;
+        flex-direction: column;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    
+    main {
+        display: flex;
+        flex-direction: row;
+        box-shadow: 0 0 25px 0 rgba(45, 92, 89, 0.3);
+        flex: auto;
+    }
+    
+    article {
+        flex: 2;
+        overflow-y: auto;
+    }
+    
+    aside {
+        flex: 1;
+        overflow-y: auto;
+    }
+    /*  CUSTOM STYLES */
+    /* HEADER */
+    
+    header {
+        display: block;
+        box-shadow: 0 0 25px 0 rgba(45, 92, 89, 0.3);
+        background: #1e272e;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    
+    header div.main-nav {
+        display: flex;
+        align-items: center;
+    }
+    
+    header div.right {
+        display: flex;
+        align-items: center;
+    }
+    
+    header div.fb-share-button {
+        padding-right: 10px;
+    }
+    
+    header ul li a {
+        color: wheat;
+    }
+    
+    header ul li:hover {
+        border-bottom: 1px solid white;
+    }
+    
+    header .logo {
+        width: 60px;
+    }
+    /* MAIN */
+    
+    div.about-points {
+        padding: 0 0 15px;
+        text-align: center;
+    }
+    
+    div p {
+        text-align: justify;
+        font-size: 20px;
+    }
+    
+    div h1,
+    h2,
+    h3,
+    h4 {
+        text-align: left;
+        font-weight: bold;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    
+    div h3 {
+        padding-bottom: 15px;
+    }
+    
+    img {
+        padding: 10px;
+    }
+    
+    footer {
+        text-align: center;
+        padding: 50px;
+    }
+    /*  CONTACT */
+    
+    .logo {
+        text-align: center;
+        font-size: 3em;
+    }
+    
+    .logo span {
+        color: #3180ca;
+    }
+    
+    .contact-wrapper {
+        box-shadow: 0 0 20px 0 rgba(53, 62, 139, 0.3);
+    }
+    
+    .contact-wrapper>* {
+        padding: 1em;
+    }
+    
+    .contact-form {
+        background: #ffffff;
+    }
+    
+    .contact-form form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .contact-form form label {
+        display: block;
+    }
+    
+    .contact-form form p {
+        margin: 0;
+        padding: 1em;
+    }
+    
+    .contact-form form .block {
+        grid-column: 1 / 3;
+    }
+    
+    .contact-form form button,
+    .contact-form form input,
+    .contact-form form textarea {
+        width: 100%;
+        padding: .7em;
+        border: none;
+        background: none;
+        outline: 0;
+        color: rgb(59, 59, 59);
+        border-bottom: 1px solid #c8c8c8;
+    }
+    
+    .contact-form form button {
+        background: #49a7ff;
+        border: 0;
+        text-transform: uppercase;
+        padding: 1em;
+    }
+    
+    .contact-form form button:hover,
+    .contact-form form button:focus {
+        cursor: pointer;
+        background: #43b4ff;
+        color: #fff;
+        transition: background-color 1s ease-out;
+        outline: 0;
+    }
+    /*COMMENTS */
+    
+    aside div p {
+        background: white;
+        border: none;
+        font-size: 15px;
+    }
+    
+    aside div a {
+        font-size: 20px;
+        text-decoration: none;
+        color: rgb(51, 48, 48);
+    }

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://i.ibb.co/Wc4QMTK/logo.png" />
+    <title>Tutorials</title>
+    <link href="https://www.holbertonschool.com/level2/holberton.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <script src="behavior.js"></script>
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="right">
+            <div id="fb-root"></div>
+            <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v7.0" nonce="6FTmRVjt"></script>
+            <div class="fb-share-button" data-href="http://54.152.238.63/index.html" data-layout="button_count" data-size="small">
+                <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A5500%2Findex.html&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a>
+            </div>
+            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false"></a>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+        <div class="main-nav">
+            <a href="index.html">
+                <img src="https://i.ibb.co/Wc4QMTK/logo.png" alt="logo" class="logo">
+            </a>
+            <ul>
+                <li>
+                    <a href="index.html ">Home</a>
+                </li>
+                <li>
+                    <a href="tutorials.html">Tutorials</a>
+                </li>
+                <li>
+                    <a href="tweets.html">Tweets</a>
+                </li>
+                <li>
+                    <a href="contact.html">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <!-- MAIN -->
+    <main>
+        <article>
+            <div class="pointcloud">
+                <h1>
+                    Generate and visualize a colored point cloud from RGBD camera using python.
+                </h1>
+                <p>
+                    Here we will see the code to generate the point cloud, this code is based on the theory presented in the
+                    <a href="index.html">home page</a>.
+                </p>
+
+            </div>
+            <div class="dataAdcquisition">
+                <h3>Data Adcquisition</h3>
+                <img src="https://i.ibb.co/2qr98mT/depth-Image.png" alt="depth-Image" border="0">
+                <p>
+                    The first thing we need is a depth sensor to obtain the depth data, for this the Microsoft kinect sensor will be used, however the theory of this tutorial will be used for any sensor, the difference would be the way to acquire the data.
+                </p>
+                <h4>Requirements</h4>
+                <ul>
+                    <li>ubuntu 18.04</li>
+                    <li>install libfreenect</li>
+                    <li>pip install opencv-python</li>
+                    <li>pip install numpy</li>
+                </ul>
+                <p>Here's how to acquire the kinect sensor data. The file name is DataAdcquisition.py</p>
+                <script src="https://gist.github.com/Jjat00/ff26d72d53cec5cab5dd329adcb6e043.js"></script>
+            </div>
+            <div class="dataTransformation">
+                <h3>Data Transformation</h3>
+                <p>
+                    Here we explain the procedure to transform the depth map returned by the depth camera to real world 3D coordinates. For this, the equation that comes from the pinhole model of a camera is used.
+                </p>
+                <h4>Requirements</h4>
+                <ul>
+                    <li>pip install opencv-python</li>
+                    <li>pip install numpy</li>
+                </ul>
+                <p>
+                    This class shows how to transform the images and how to generate the color of the point cloud from the intrinsic matrix and the homography matrix. The file name is Transformation.py
+                </p>
+                <script src="https://gist.github.com/Jjat00/938bce237d41326b9255e2cf7f64153d.js"></script>
+            </div>
+            <div class="dataVisualization">
+                <h3>Data Visualization</h3>
+                <img src="https://i.ibb.co/2qHtw2D/pointc.png" alt="pointc" border="0">
+                <h4>Requirements</h4>
+                <ul>
+                    <li>DataAdcquisition.py</li>
+                    <li>Transformation.py</li>
+                    <li>pip install numpy</li>
+                    <li>pip install vedo</li>
+                </ul>
+                <script src="https://gist.github.com/Jjat00/f6be29bb04efe707cb3c69368ca47682.js"></script>
+                <img src="https://i.ibb.co/ynpj2Wd/pointcolor.png" alt="pointcolor">
+            </div>
+        </article>
+        <aside>
+            <div>
+                <div id="disqus_thread"></div>
+                <script>
+                    (function() {
+                        var d = document,
+                            s = d.createElement('script');
+                        s.src = 'https://cameratutorials.disqus.com/embed.js';
+                        s.setAttribute('data-timestamp', +new Date());
+                        (d.head || d.body).appendChild(s);
+                    })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered
+                byDisqus.</a></noscript>
+            </div>
+            <h2>Tweets</h2>
+            <div>
+                <blockquote class="twitter-tweet">
+                    <p lang="en" dir="ltr">Increasing the size of the point cloud particles really helps in getting a faster view of the scanned areas. <a href="https://twitter.com/hashtag/ARKit4?src=hash&amp;ref_src=twsrc%5Etfw">#ARKit4</a>
+                        <a href="https://twitter.com/hashtag/AR?src=hash&amp;ref_src=twsrc%5Etfw">#AR</a> <a href="https://t.co/v0fr9pic6u">pic.twitter.com/v0fr9pic6u</a></p>&mdash; Dilmer Valecillos (@Dilmerv) <a href="https://twitter.com/Dilmerv/status/1277283268006563841?ref_src=twsrc%5Etfw">June
+                28, 2020</a>
+                </blockquote>
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+            <div>
+                <blockquote class="twitter-tweet">
+                    <p lang="en" dir="ltr">We put up a new tech report on PyTorch3D!<br><br>It details our modular and efficient differentiable mesh + point cloud renderers and other ops. We use them to train networks that predict textured mesh and point clouds from single
+                        image, without 3D supervision!<a href="https://t.co/xDKocWpjrz">https://t.co/xDKocWpjrz</a> <a href="https://t.co/72jtAYeoiA">pic.twitter.com/72jtAYeoiA</a></p>
+                    &mdash; Justin Johnson (@jcjohnss) <a href="https://twitter.com/jcjohnss/status/1284238475806507021?ref_src=twsrc%5Etfw">July
+                                                17, 2020</a>
+                </blockquote>
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8">
+                </script>
+            </div>
+        </aside>
+    </main>
+    <!-- FOOTER -->
+    <footer>
+        Made by <a href="https://twitter.com/" target="_blank">Jaime Aza</a> for <a href="https://github.com/Jjat00" target="_blank">Jjat00</a>.
+    </footer>
+
+</body>
+
+</html>
