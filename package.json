@@ -1,4 +1,23 @@
 {
+  "name": "web-page-depth-to-point-cloud",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "gh-pages -d src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@Jjat00.github.com:Jjat00/web-page-depth-to-point-cloud.git"
+  },
+  "keywords": [
+    "point cloud",
+    "rgbd",
+    "python",
+    "homography"
+  ],
+  "author": "Jaime Aza",
+  "license": "MIT",
   "devDependencies": {
     "gh-pages": "^5.0.0"
   }
