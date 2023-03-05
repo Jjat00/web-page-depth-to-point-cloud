@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://i.ibb.co/Wc4QMTK/logo.png"
+    />
+    <title>Depth to point cloud</title>
+    <meta
+      name="google-site-verification"
+      content="c_9bbc5sqgKB5wnhDK4LlmNFokBu67a3rr0xV_mRGKs"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link href="style/styles.css" rel="stylesheet" />
+    <script src="behavior.js"></script>
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <header>
+      <div class="right">
+        <div id="fb-root"></div>
+        <script
+          async
+          defer
+          crossorigin="anonymous"
+          src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v7.0"
+          nonce="6FTmRVjt"
+        ></script>
+        <div
+          class="fb-share-button"
+          data-href="http://54.152.238.63/index.html"
+          data-layout="button_count"
+          data-size="small"
+        >
+          <a
+            target="_blank"
+            href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A5500%2Findex.html&amp;src=sdkpreparse"
+            class="fb-xfbml-parse-ignore"
+          ></a>
+        </div>
+        <a
+          href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+          class="twitter-share-button"
+          data-show-count="false"
+        ></a>
+        <script
+          async
+          src="https://platform.twitter.com/widgets.js"
+          charset="utf-8"
+        ></script>
+      </div>
+      <div class="main-nav">
+        <a href="index.html">
+          <img
+            src="https://i.ibb.co/Wc4QMTK/logo.png"
+            alt="logo"
+            class="logo"
+          />
+        </a>
+        <ul>
+          <li>
+            <a href="index.html ">Home</a>
+          </li>
+          <li>
+            <a href="tutorials.html">Tutorials</a>
+          </li>
+          <li>
+            <a href="tweets.html">Tweets</a>
+          </li>
+          <li>
+            <a href="contact.html">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <!-- MAIN -->
+    <main>
+      <article>
+        <div class="about-points">
+          <h1>Generate a Point Cloud From Depth Data</h1>
+          <img src="https://i.ibb.co/48hK9RN/nubu1.jpg" alt="nubu1" />
+        </div>
+        <div class="about-points">
+          <h2>Introduction</h2>
+          <p>
+            A point cloud is a set of vertices in a three-dimensional
+            coordinates system.These vertices are defined in the coordinates
+            (x,y,z) and are used by the description of the outerof an object.
+          </p>
+          <p>
+            In this tutorial you will learn how to transform a depth image into
+            a 3D point cloud, we will also learn how to assign color to the
+            point cloud and finally how to visualize this point cloud, all using
+            Python. But before going to the code, let's first learn some
+            concepts.
+          </p>
+        </div>
+        <div class="about-points">
+          <h3>Intrinsic Matrix</h3>
+          <p>
+            Intrinsic parameters are camera specific. Includes information such
+            as focal length (f_x, f_y), optical centers (c_x, c_y), etc. Also
+            called a camera array. It depends only on the camera, so once
+            calculated, it can be stored for future purposes. It is expressed as
+            a 3 × 3 matrix:
+          </p>
+          <img
+            src="https://www.aprenderpython.net/wp-content/uploads/2018/01/tipos-de-distosion-camara4.png"
+            alt="image"
+            class="image"
+          />
+          <p>
+            These parameters are found through the calibration of a camera, with
+            the calibration it is possible to relate these measurements from the
+            camera with measurements from the real three-dimensional world. This
+            is important because scenes are not just three-dimensional, they are
+            also physical spaces with physical units, therefore the relationship
+            between the natural units of the camera (pixels) and the units of
+            the physical world is a critical component in any attempt to
+            construct a three-dimensional scene as it is in this case.
+          </p>
+          <p>
+            This tutorial does not explain how to calibrate a camera, it is
+            assumed that you already have the intrinsic matrix of your camera.
+          </p>
+        </div>
+        <div class="about-points">
+          <h3>Homography Matrix</h3>
+          <p>
+            A Homography is a projective transformation or perspective
+            transformation that determines a bijective correspondence between
+            the points of two planes
+          </p>
+          <img
+            id="smart_thumbnail"
+            src="https://i.ibb.co/T2873jq/homography.png"
+            alt="homography"
+          />
+          <p>
+            This transformation of perspective is necessary, since the rgb
+            camera with the depth camera are not exactly alienated due to their
+            physical conditions. This transformation can be represented by a 3x3
+            matrix:
+          </p>
+          <img
+            src="https://i.ibb.co/0mdSD3P/homography-Matrix.png"
+            alt="homography-Matrix"
+          />
+          <p>
+            The intention of the homography is that the two cameras are
+            referenced to the same coordinate system, so the data fusion will
+            simply be a color correspondence to the point cloud.
+          </p>
+        </div>
+        <div class="about-points">
+          <h3>Data Fusion</h3>
+          <p>
+            With the point cloud already generated, the process for assigning
+            color to the point cloud is now explained. The coordinate system of
+            interest is that of the depth camera, RGB images are transformed to
+            this system, with the images related to the depth camera coordinate
+            system, the color of each pixel in position (u, v) in the image
+            resulting from the transformation, it corresponds to the color of
+            each vertex at the position (u, v) of the depth image, that is:
+          </p>
+          <img src="https://i.ibb.co/pfLRcv8/fusion.png" alt="fusion" />
+        </div>
+      </article>
+      <aside>
+        <div>
+          <div id="disqus_thread"></div>
+          <script>
+            (function () {
+              var d = document,
+                s = d.createElement("script");
+              s.src = "https://cameratutorials.disqus.com/embed.js";
+              s.setAttribute("data-timestamp", +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          </script>
+          <noscript
+            >Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript"
+              >comments powered byDisqus.</a
+            ></noscript
+          >
+        </div>
+        <div>
+          <a href="tutorials.html">
+            <h3>Data Acquisition</h3>
+          </a>
+          <img
+            src="https://i.ibb.co/2qr98mT/depth-Image.png"
+            alt="depth-Image"
+            border="0"
+          />
+          <p>
+            The first thing we need is a depth sensor to obtain the depth data,
+            for this the Microsoft kinect sensor will be used, however the
+            theory of this tutorial will be used for any sensor, the difference
+            would be the way to acquire the data.
+          </p>
+        </div>
+        <div>
+          <a href="tutorials.html">
+            <h3>Data Transformation</h3>
+          </a>
+          <p>
+            Here we explain the procedure to transform the depth map returned by
+            the depth camera to real world 3D coordinates. For this, the
+            equation that comes from the pinhole model of a camera is used.
+          </p>
+        </div>
+        <div>
+          <a href="tutorials.html">
+            <h3>Data Visualization</h3>
+          </a>
+          <img
+            src="https://i.ibb.co/2qHtw2D/pointc.png"
+            alt="pointc"
+            border="0"
+          />
+        </div>
+        <h2>Tweets</h2>
+        <div>
+          <blockquote class="twitter-tweet">
+            <p lang="en" dir="ltr">
+              Increasing the size of the point cloud particles really helps in
+              getting a faster view of the scanned areas.
+              <a
+                href="https://twitter.com/hashtag/ARKit4?src=hash&amp;ref_src=twsrc%5Etfw"
+                >#ARKit4</a
+              >
+              <a
+                href="https://twitter.com/hashtag/AR?src=hash&amp;ref_src=twsrc%5Etfw"
+                >#AR</a
+              >
+              <a href="https://t.co/v0fr9pic6u">pic.twitter.com/v0fr9pic6u</a>
+            </p>
+            &mdash; Dilmer Valecillos (@Dilmerv)
+            <a
+              href="https://twitter.com/Dilmerv/status/1277283268006563841?ref_src=twsrc%5Etfw"
+              >June 28, 2020</a
+            >
+          </blockquote>
+          <script
+            async
+            src="https://platform.twitter.com/widgets.js"
+            charset="utf-8"
+          ></script>
+        </div>
+      </aside>
+    </main>
+    <!-- FOOTER -->
+    <footer>
+      Made by
+      <a href="https://www.linkedin.com/in/jaimeaza/" target="_blank"
+        >Jaime Aza</a
+      >
+      for <a href="https://github.com/Jjat00" target="_blank">Jjat00</a>.
+    </footer>
+  </body>
+</html>
